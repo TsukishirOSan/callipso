@@ -18,11 +18,12 @@ RUN cat /tmp/gemrc >> /etc/gemrc
 
 # install fluentd
 RUN /usr/local/rvm/bin/rvm-shell -l -c "gem install fluentd --no-document"
-RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd --setup ./fluent"
-RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd -c ./fluent/fluent.conf -vv &"
-
-# config for fluentd
 RUN adduser --no-create-home --disabled-login --disabled-password --quiet fluentd
+#RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd --setup ./fluent"
+#RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd -c ./fluent/fluent.conf -vv &"
+
+# clean up
+RUN DEBIAN_FRONTEND=noninteractive apt-get clean --yes
 
 # make logging directory
 RUN mkdir -p /var/log/supervisor
