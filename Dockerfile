@@ -1,4 +1,4 @@
-# Time-stamp: <2014-03-21 09:51:35 yonkeltron>
+# Time-stamp: <2014-03-21 19:40:21 yonkeltron>
 FROM debian:jessie
 MAINTAINER yonkeltron
 # update stuff
@@ -16,9 +16,15 @@ ADD gemrc /tmp/gemrc
 RUN touch /etc/gemrc
 RUN cat /tmp/gemrc >> /etc/gemrc
 
+ADD config /sexbox
+WORKDIR /sexbox
+ADD Gemfile /sexbox/Gemfile
+RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle install"
+#ADD config.rb /sexbox/config.rb
+#RUN /usr/local/rvm/bin/rvm-shell -l -c "ruby config.rb"
+
 # install fluentd
-RUN /usr/local/rvm/bin/rvm-shell -l -c "gem install fluentd --no-document"
-RUN adduser --no-create-home --disabled-login --disabled-password --quiet fluentd
+#RUN adduser --no-create-home --disabled-login --disabled-password --quiet --gecos "" fluentd
 #RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd --setup ./fluent"
 #RUN /usr/local/rvm/bin/rvm-shell -l -c "fluentd -c ./fluent/fluent.conf -vv &"
 
@@ -28,8 +34,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get clean --yes
 # make logging directory
 RUN mkdir -p /var/log/supervisor
 # add supervisor config
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+#ADD config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # GO TIME PARTY NOW
-CMD ["/usr/bin/supervisord"]
+#CMD ["/usr/bin/supervisord"]
 

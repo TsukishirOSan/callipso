@@ -1,0 +1,7 @@
+[
+    {
+        "title"  : "fluentd configuation file",
+        "input"  : "fluent.conf",
+        "output" : "/fluent/fluent.conf"
+    }
+]
