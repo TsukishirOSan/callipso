@@ -1,12 +1,13 @@
-# Time-stamp: <2014-03-21 19:40:21 yonkeltron>
-FROM debian:jessie
+# Time-stamp: <2014-05-12 20:09:10 yonkeltron>
+FROM debian:testing
 MAINTAINER yonkeltron
 # update stuff
 RUN apt-get update --fix-missing
+RUN apt-get install apt-utils --yes
 RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
 # install needed packages
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev supervisor
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev #supervisor
 
 # install rvm and ruby
 RUN curl -sSL https://get.rvm.io | bash -s stable
