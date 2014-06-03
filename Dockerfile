@@ -4,15 +4,16 @@ MAINTAINER yonkeltron
 # update stuff
 RUN apt-get update --fix-missing
 RUN apt-get install apt-utils --yes
-RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
+#RUN DEBIAN_FRONTEND=noninteractive apt-get upgrade --yes
 
 # install needed packages
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev #supervisor
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev libgnutls26 #supervisor
 
 # install rvm and ruby
+RUN ln -sf /proc/self/fd /dev/fd
 RUN curl -sSL https://get.rvm.io | bash -s stable
-RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.1 --fuzzy"
-RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.1 --default"
+RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.2 --fuzzy"
+RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.2 --default"
 ADD gemrc /tmp/gemrc
 RUN touch /etc/gemrc
 RUN cat /tmp/gemrc >> /etc/gemrc
@@ -20,6 +21,7 @@ RUN cat /tmp/gemrc >> /etc/gemrc
 ADD config /sexbox
 WORKDIR /sexbox
 ADD Gemfile /sexbox/Gemfile
+RUN /usr/local/rvm/bin/rvm-shell -l -c "gem install bundler"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "bundle install"
 #ADD config.rb /sexbox/config.rb
 #RUN /usr/local/rvm/bin/rvm-shell -l -c "ruby config.rb"
