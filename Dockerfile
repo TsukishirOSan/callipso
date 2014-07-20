@@ -1,4 +1,4 @@
-# Time-stamp: <2014-05-12 20:09:10 yonkeltron>
+# Time-stamp: <2014-07-14 14:48:08 yonkeltron>
 FROM debian:testing
 MAINTAINER yonkeltron
 # update stuff
@@ -10,7 +10,7 @@ RUN apt-get install apt-utils --yes
 RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev libgnutls26 #supervisor
 
 # install rvm and ruby
-RUN ln -sf /proc/self/fd /dev/fd
+#RUN ln -sf /proc/self/fd /dev/fd
 RUN curl -sSL https://get.rvm.io | bash -s stable
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.2 --fuzzy"
 RUN /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.2 --default"
