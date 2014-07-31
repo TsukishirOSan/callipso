@@ -1,0 +1,42 @@
+---
+- hosts: localhost
+  remote_user: root
+  tasks:
+    - name: apt-get update
+      apt: update_cache=yes
+    - name: apt-get upgrade
+      apt: upgrade=yes
+    - name: install needed packages
+      apt: name={{ item }} state=installed install_recommends=no
+      with_items:
+        - autoconf
+        - automake
+        - bison
+        - build-essential
+        - curl
+        - gawk
+        - git
+        - libffi-dev
+        - libgdbm-dev
+        - libgnutls26
+        - libncurses5-dev
+        - libpq-dev
+        - libreadline6-dev
+        - libsqlite3-dev
+        - libssl-dev
+        - libtool
+        - libxml2-dev
+        - libxslt-dev
+        - libyaml-dev
+        - pkg-config
+        - python-selinux
+        - procps
+        - sqlite3
+    - name: Install RVM
+      shell: "curl -sSL https://get.rvm.io | bash -s stable"
+    - name: Install Ruby 2.1.2
+      shell: /usr/local/rvm/bin/rvm-shell -l -c "rvm install 2.1.2 --fuzzy"
+    - name: Make 2.1.2 default
+      shell: /usr/local/rvm/bin/rvm-shell -l -c "rvm use 2.1.2 --default"
+    - name: Install bundler
+      shell: /usr/local/rvm/bin/rvm-shell -l -c "gem install bundler"
