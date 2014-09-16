@@ -14,6 +14,7 @@
         - bison
         - build-essential
         - curl
+        - etckeeper
         - gawk
         - git
         - libffi-dev
