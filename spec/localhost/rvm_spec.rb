@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe 'RVM' do
   describe command('rvm version') do
-    it { should return_stdout(/\(stable\)/) }
+    its(:stdout) { should match(/\(stable\)/) }
   end
 
   describe command('rvm list') do
-    it { should return_stdout(/2\.1\.2/) }
+    its(:stdout) { should match(/2\.1\.2/) }
   end
 end
