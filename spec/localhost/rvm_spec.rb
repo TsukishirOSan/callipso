@@ -6,6 +6,6 @@ describe 'RVM' do
   end
 
   describe command('rvm list') do
-    its(:stdout) { should match(/2\.1\.2/) }
+    its(:stdout) { should match(/2\.1\.4/) }
   end
 end

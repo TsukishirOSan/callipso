@@ -1,4 +1,4 @@
-# Time-stamp: <2014-10-13 14:02:02 yonkeltron>
+# Time-stamp: <2014-10-27 19:34:35 yonkeltron>
 FROM debian:testing
 MAINTAINER yonkeltron
 
@@ -15,7 +15,7 @@ RUN apt-get update #--fix-missing
 # install needed packages
 #RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes build-essential libssl-dev libyaml-dev git libtool libxslt-dev libxml2-dev libpq-dev gawk curl procps libreadline6-dev libsqlite3-dev sqlite3 autoconf libgdbm-dev libncurses5-dev automake bison pkg-config libffi-dev libgnutls26 #supervisor
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --fix-missing apt-utils ansible aptitude etckeeper
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --yes --fix-missing --no-install-recommends apt-utils ansible aptitude
 RUN echo localhost >> /etc/ansible/hosts
 RUN ansible-playbook -c local configuration-playbook.yml
 
