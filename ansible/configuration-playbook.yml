@@ -19,7 +19,8 @@
         - git
         - libffi-dev
         - libgdbm-dev
-        - libgnutls26
+        - libgnutls-openssl27
+        - libgnutls-deb0-28
         - libncurses5-dev
         - libpq-dev
         - libreadline6-dev
@@ -34,6 +35,8 @@
         - python-selinux
         - procps
         - sqlite3
+    - name: Configure RVM keys
+      shell: gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
     - name: Install RVM
       shell: "curl -sSL https://get.rvm.io | bash -s stable"
     - name: Install Ruby 2.1.2

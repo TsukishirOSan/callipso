@@ -13,7 +13,7 @@ describe 'Development Dependencies' do
     'curl',
     'libffi-dev',
     'libgdbm-dev',
-    'libgnutls26',
+    'libgnutls-deb0-28',
     'libncurses5-dev',
     'libpq-dev',
     'libreadline6-dev',
